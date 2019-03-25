@@ -6,7 +6,7 @@ Home--> new item -> enter folder name --> choose folder --> OK
   1. from within your folder select new job
   2. enter job name and choose freestyle project
   3. in sourcecode management select "GIT" and enter https://github.com/AdityaSP/htmlonly
-  4. Add build steps
+  4. Add build steps (Execute shell)
     4.1 ls /var/www/html/aditya 2> /dev/null || mkdir /var/www/html/aditya
     4.2 cp $WORKSPACE/* /var/www/html/aditya/
     
