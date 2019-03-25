@@ -13,3 +13,15 @@ Home--> new item -> enter folder name --> choose folder --> OK
 3. Save the build
 4. trigger the build -> "Build now"
 --------------------------------------------------------------------------------------------------------------------
+Add Post build action to archive the build
+Trigger a build and visit the below location and drill down to your build number
+  /var/lib/jenkins/jobs/
+Also, see the artifacts in the build page itself.
+--------------------------------------------------------------------------------------------------------------------
+Add post build action for Editable email. 
+change the recipient list
+attach the build log
+add a trigger for always and add recipient list
+trigger a build.
+check your mail inbox
+-------------------------------------------------------------------------------------------------------------------
