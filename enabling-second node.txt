@@ -1,0 +1,109 @@
+Adding a new agent node jenkins
+1. Create ssh key and keep the public key handy
+
+$ cd ~/.ssh
+$ ssh-keygen -t rsa
+$ cat ~/.ssh/id_rsa.pub
+
+############## output of the above steps ####################
+ubuntu@ip-172-31-42-75:~$ cd .ssh
+ubuntu@ip-172-31-42-75:~/.ssh$ ls
+authorized_keys  id_rsa  id_rsa.pub  known_hosts
+ubuntu@ip-172-31-42-75:~/.ssh$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa):
+/home/ubuntu/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ubuntu/.ssh/id_rsa.
+Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:c04Ic8q85Y4SW97o8ecnUTYIu9m+I2zu8AdyxxNFobQ ubuntu@ip-172-31-42-75
+The key's randomart image is:
++---[RSA 2048]----+
+|          ..o.   |
+|        .. o.    |
+|      o .oEo     |
+|     o =..o +    |
+|      + S=o+ .   |
+|    . o+==*      |
+|     =+*.+.o     |
+|    o oB= * .    |
+|     oo+*=o=     |
++----[SHA256]-----+
+ubuntu@ip-172-31-42-75:~/.ssh$
+ubuntu@ip-172-31-42-75:~/.ssh$ cat cat ~/.ssh/id_rsa.pub
+cat: cat: No such file or directory
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAyG72oTwYxuPzgRrci6OJjvmZoEH14w/x6HpZyne1wXr/YSlhIwnJgVNSyGrTRKuFZbWgsuZDtRw4CspeK30fNGY+D3Q6eENCs/Mr+09xLE7efm942ZzFwyl/wThnCmaI+dM52bkorRTZK01b/4a0AFr/v6VFLN8vuA3g1as7Gkm7c6z1Rmio/mRMuW8nrHDbpb+ED3loofww+jTB5dAixJ4RZtpoEj3B1IweKHyvrbHWXJUn+GF/6z23fIIKLY0Je7FiNatOlfMpmeICvfUjdBVz3sM2LmSdXgbOmv8Aw05whBsW16fy9U/9O047oAuwf79jd5HFD80pAwO6qanR ubuntu@ip-172-31-42-75
+
+###############################################################
+
+2. On node2 edit ~/.ssh/authorized and add public key
+
+##################### output of above execution ###################
+
+ubuntu@ip-172-31-91-108:~$ cd .ssh
+ubuntu@ip-172-31-91-108:~/.ssh$ ls
+authorized_keys
+ubuntu@ip-172-31-91-108:~/.ssh$ cat authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaqTMGC4wAzcQny/nD6V+vsW/lnrRofuxaD3vlrqDr7KfVFlCifVsgj1qogZcGplVXTLDM3um05kWk4jxJ5m2VBtnOYOpZKwadfMSx2zj7PNCe2WBiT+FBVkR1AYL7z5deKqekjNp7dpdZbIWumigZgvmxUnAFt6bQ39aem0I5hNQMjuScbAxKw6hdxWIGWj6kNU1s98y9IB3HJfltZe+tG+EE33HLAnWDlKKfG+HbVUGl3oEOQammeESUKm/v3SXyKZ8FLW9BY805glxVnQLE64FoRImGHrALZOJ800wn1wkf5pw4NNrTubiULTiP3a9PGak0k+JFPQO18YNL4FT9 aditya-trainer-key
+ubuntu@ip-172-31-91-108:~/.ssh$ vi authorized_keys
+ubuntu@ip-172-31-91-108:~/.ssh$
+ubuntu@ip-172-31-91-108:~/.ssh$ cat authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaqTMGC4wAzcQny/nD6V+vsW/lnrRofuxaD3vlrqDr7KfVFlCifVsgj1qogZcGplVXTLDM3um05kWk4jxJ5m2VBtnOYOpZKwadfMSx2zj7PNCe2WBiT+FBVkR1AYL7z5deKqekjNp7dpdZbIWumigZgvmxUnAFt6bQ39aem0I5hNQMjuScbAxKw6hdxWIGWj6kNU1s98y9IB3HJfltZe+tG+EE33HLAnWDlKKfG+HbVUGl3oEOQammeESUKm/v3SXyKZ8FLW9BY805glxVnQLE64FoRImGHrALZOJ800wn1wkf5pw4NNrTubiULTiP3a9PGak0k+JFPQO18YNL4FT9 aditya-trainer-key
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAyG72oTwYxuPzgRrci6OJjvmZoEH14w/x6HpZyne1wXr/YSlhIwnJgVNSyGrTRKuFZbWgsuZDtRw4CspeK30fNGY+D3Q6eENCs/Mr+09xLE7efm942ZzFwyl/wThnCmaI+dM52bkorRTZK01b/4a0AFr/v6VFLN8vuA3g1as7Gkm7c6z1Rmio/mRMuW8nrHDbpb+ED3loofww+jTB5dAixJ4RZtpoEj3B1IweKHyvrbHWXJUn+GF/6z23fIIKLY0Je7FiNatOlfMpmeICvfUjdBVz3sM2LmSdXgbOmv8Aw05whBsW16fy9U/9O047oAuwf79jd5HFD80pAwO6qanR ubuntu@ip-172-31-42-75
+ubuntu@ip-172-31-91-108:~/.ssh$
+ubuntu@ip-172-31-91-108:~/.ssh$
+
+########################################################################
+
+3. From master try ssh ubuntu@<ipadress of agent> (This step proves that the connection is working fine.)
+
+###################### Out put of above ###############################
+ubuntu@ip-172-31-42-75:~/.ssh$ ssh ubuntu@172.31.91.108
+The authenticity of host '172.31.91.108 (172.31.91.108)' can't be established.
+ECDSA key fingerprint is SHA256:1opK5zWrwuIzSJCkn4Hk+8IPJS7U7dDlZgiRr/7FIx4.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '172.31.91.108' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.4.0-1075-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+0 packages can be updated.
+0 updates are security updates.
+
+New release '18.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Mar 27 05:16:06 2019 from 175.100.148.23
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-91-108:~$ exit
+logout
+Connection to 172.31.91.108 closed.
+ubuntu@ip-172-31-42-75:~/.ssh$
+ubuntu@ip-172-31-42-75:~/.ssh$
+########################################################################
+
+Jenkins configuration of the slave node
+1. Add a permanent node
+2. choose any directory preferably /home/unbuntu/.jenkins
+3. Choose launch via ssh
+4. Add user name as "ubuntu"
+5. enter private key by copying from ~/.ssh/id_rsa
+6. Check if the node is up
+
+
+
+
+
+
+ 
