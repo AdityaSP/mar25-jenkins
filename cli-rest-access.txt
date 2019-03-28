@@ -1,0 +1,6 @@
+CLI
+java -jar jenkins-cli.jar -s http://localhost:8080 -auth devopsadmin:devopsadmin build one
+java -jar jenkins-cli.jar -s http://localhost:8080 -auth devopsadmin:devopsadmin console one 3
+
+REST API
+curl -X POST http://localhost:8080/job/aditya/job/delayed-fre--user devopsadmin:devopsadmin
