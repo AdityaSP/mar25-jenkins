@@ -1,0 +1,44 @@
+On Jenkins master
+1. installed ansible
+    $ apt-get install ansible
+    
+2. ansible.cfg --> has link to hosts file
+ubuntu@ip-172-31-42-75:~/aditya$ cat ansible.cfg
+[defaults]
+inventory      = /home/ubuntu/aditya/hosts
+ubuntu@ip-172-31-42-75:~/aditya$
+
+
+3. hosts --> has ip address of my prod machine
+
+ubuntu@ip-172-31-42-75:~/aditya$ cat hosts
+[prod]
+3.85.164.37
+[ua]
+52.90.85.162
+ubuntu@ip-172-31-42-75:~/aditya$
+
+4. set up passwordless ssh to prod machine
+
+1. install python on prod and ua machines
+$ apt-get install python
+
+-- Setup is complete
+
+
+On Jenkins master
+
+ubuntu@ip-172-31-42-75:~/aditya$ cat java-tomcat.yml
+#playbooks for ansible
+- hosts: all
+  become: true
+  tasks:
+  - name: "Install java"
+    apt:
+      name: openjdk-8-jdk
+      update_cache: yes
+ubuntu@ip-172-31-42-75:~/aditya$
+
+
+$ ansible-playbook java-tomcat.yml
+$ ansible all -m command -a "java -version"
